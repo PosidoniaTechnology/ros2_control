@@ -29,7 +29,7 @@ namespace
 // Reference: https://man7.org/linux/man-pages/man2/sched_setparam.2.html
 // This value is used when configuring the main loop to use SCHED_FIFO scheduling
 // We use a midpoint RT priority to allow maximum flexibility to users
-int const kSchedPriority = 50;
+int const kSchedPriority = 99;
 
 }  // namespace
 
@@ -48,7 +48,7 @@ int main(int argc, char ** argv)
   std::thread cm_thread(
     [cm]()
     {
-      if (realtime_tools::has_realtime_kernel())
+      if (realtime_tools::has_realtime_kernel() || true)
       {
         if (!realtime_tools::configure_sched_fifo(kSchedPriority))
         {
